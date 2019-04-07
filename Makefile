@@ -20,12 +20,12 @@ LINKERFLAGS := -lm -Wall -Werror
 
 
 # Making the executables from the compiled object files
-test.exe: main.o source1.o source2.o source3.o
-	$(CC) $^ -o "test.exe"
+test: main.o source1.o source2.o source3.o
+	$(CC) $^ -o "test"
 	@echo -e "Making exectuable		[\033[32mOK\033[0m]"
 
 # Builds test.exe if not done already, then | or launch the executable
-launch: test.exe
+launch: test
 	@echo -e "[\033[32mRunning executable\033[0m]"
 	./$^
 
@@ -33,22 +33,22 @@ launch: test.exe
 # Building object files from our source files
 main.o: main.c common.h
 	$(CC) $(LINKERFLAGS) -c main.c
-	@echo -e "Creating object from main		[\033[32mOK\033[0m]"	
+	@echo -e "Creating object from main		[\033[32mOK\033[0m]"
 
-source1.o: source1.c 
-	$(CC) $(LINKERFLAGS) -c source1.c 
-	@echo -e "Creating object from source1		[\033[32mOK\033[0m]"	
+source1.o: source1.c
+	$(CC) $(LINKERFLAGS) -c source1.c
+	@echo -e "Creating object from source1		[\033[32mOK\033[0m]"
 
-source2.o: source2.c 
-	$(CC) $(LINKERFLAGS) -c source2.c 
-	@echo -e "Creating object from source2		[\033[32mOK\033[0m]"	
+source2.o: source2.c
+	$(CC) $(LINKERFLAGS) -c source2.c
+	@echo -e "Creating object from source2		[\033[32mOK\033[0m]"
 
-source3.o: source3.c 
-	$(CC) $(LINKERFLAGS) -c source3.c 
-	@echo -e "Creating object from source3		[\033[32mOK\033[0m]"	
+source3.o: source3.c
+	$(CC) $(LINKERFLAGS) -c source3.c
+	@echo -e "Creating object from source3		[\033[32mOK\033[0m]"
 
 
-# Clean object files and exe files 
+# Clean object files and exe files
 clean:
 	@echo -e "\033[33mCleaning files\033[0m"
-	rm -rvf *.o *.exe
+	rm -rvf *.o test
